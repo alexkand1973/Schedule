@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //Делаем навигацию между фрагментами:
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, ListFragment())
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, ListFragment()).commit()
     }
 }
