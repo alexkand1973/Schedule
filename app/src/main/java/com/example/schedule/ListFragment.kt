@@ -22,6 +22,12 @@ class ListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setClickListeners()
+    }
 
+    private fun setClickListeners() {
+        binding?.fabAddLesson?.setOnClickListener {
+
+        }
     }
 }
