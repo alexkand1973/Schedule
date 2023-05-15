@@ -1,4 +1,4 @@
-package com.example.schedule
+package com.example.schedule.presentation
 
 import android.os.Bundle
 import android.renderscript.ScriptGroup.Binding

@@ -1,8 +1,9 @@
-package com.example.schedule
+package com.example.schedule.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.ListFragment
+import com.example.schedule.R
 
 class MainActivity : AppCompatActivity() {
 

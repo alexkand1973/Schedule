@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".AddLessonFragment">
+    tools:context=".presentation.AddLessonFragment">
 
     <EditText
         android:id="@+id/etLessonTitle"
@@ -13,6 +14,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="32dp"
         android:layout_weight="0.1"
+        android:background="@drawable/et_background_fragment_add_lesson"
         android:hint="@string/et_lesson_title_hint_fragment_add_lesson"
         android:inputType="text"
         android:paddingHorizontal="16dp" />
@@ -24,6 +26,9 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="32dp"
         android:layout_weight="0.4"
+        android:paddingVertical="16dp"
+        android:gravity="top"
+        android:background="@drawable/et_background_fragment_add_lesson"
         android:hint="@string/et_description_home_work_hint_fragment_add_lesson"
         android:inputType="text"
         android:paddingHorizontal="16dp" />
@@ -35,6 +40,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="32dp"
         android:layout_weight="0.1"
+        android:background="@drawable/et_background_fragment_add_lesson"
         android:hint="@string/et_name_of_teacher_hint_fragment_add_lesson"
         android:inputType="text"
         android:paddingHorizontal="16dp" />
@@ -44,10 +50,12 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="end"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:layout_weight="0.08"
-        android:backgroundTint="@color/blue"
+        app:backgroundTint="@null"
+        android:background="@drawable/btn_save_lesson_background__fragment_add_lesson"
         android:text="@string/btn_save_lesson_save_text_fragment_add_lesson"
         android:textAllCaps="false" />
 

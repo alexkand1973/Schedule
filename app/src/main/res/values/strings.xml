@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Schedule</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="btn_save_lesson_save_text_fragment_add_lesson">Save</string>
     <string name="et_lesson_title_hint_fragment_add_lesson">Lesson title</string>
     <string name="et_name_of_teacher_hint_fragment_add_lesson">Name of Teacher</string>
     <string name="et_description_home_work_hint_fragment_add_lesson">Description, home work</string>
+
 </resources>
