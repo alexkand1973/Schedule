@@ -14,7 +14,7 @@ var listOfLessons = listOf<Lesson>()
             .inflate(LayoutInflater.from(parent.context), parent, false))
     }
     override fun onBindViewHolder(holder: LessonViewHolder, position: Int) {
-
+        holder.bind(listOfLessons[position])
     }
 
     override fun getItemCount(): Int {

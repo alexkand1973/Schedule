@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schedule.databinding.FragmentListBinding
+import com.example.schedule.presentation.lessonslist.recycleView.LessonAdapter
 
 class ListFragment : Fragment() {
 
     private var binding: FragmentListBinding? = null
+    private var lessonsAdapter: LessonAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,5 +32,12 @@ class ListFragment : Fragment() {
         binding?.fabAddLesson?.setOnClickListener {
 
         }
+    }
+
+    fun initLessonAdapter() {
+        lessonsAdapter = LessonAdapter()
+       // lessonsAdapter.listOfLessons = here will be data from database
+        binding?.rvLessons?.adapter = lessonsAdapter
+        binding?.rvLessons?.layoutManager = LinearLayoutManager(requireContext())
     }
 }
