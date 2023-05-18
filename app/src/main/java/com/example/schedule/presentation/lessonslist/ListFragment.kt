@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.schedule.R
 import com.example.schedule.databinding.FragmentListBinding
+import com.example.schedule.presentation.AddLessonFragment
 import com.example.schedule.presentation.lessonslist.recycleView.LessonAdapter
 
 class ListFragment : Fragment() {
@@ -26,11 +28,17 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setClickListeners()
+        initLessonAdapter()
     }
 
     private fun setClickListeners() {
+        //По нажатию на кнопку делаем переход на фрагмент урока
         binding?.fabAddLesson?.setOnClickListener {
-
+            requireActivity().supportFragmentManager
+                .beginTransaction().apply {
+                    addToBackStack(null)
+                    .replace(R.id.fragmentContainer, AddLessonFragment()).commit()
+                }
         }
     }
 
