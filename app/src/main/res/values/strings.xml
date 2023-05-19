@@ -5,5 +5,6 @@
     <string name="et_lesson_title_hint_fragment_add_lesson">Lesson title</string>
     <string name="et_name_of_teacher_hint_fragment_add_lesson">Name of Teacher</string>
     <string name="et_description_home_work_hint_fragment_add_lesson">Description, home work</string>
+    <string name="SELECT">SELECT</string>
 
 </resources>

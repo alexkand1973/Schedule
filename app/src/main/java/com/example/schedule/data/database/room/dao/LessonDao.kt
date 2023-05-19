@@ -1,11 +1,11 @@
 package com.example.schedule.data.database.room.dao
 
 import androidx.room.*
+import com.example.schedule.R
 import com.example.schedule.data.database.room.entities.LessonDB
 
-
 @Dao
-interface LessonDao {
+interface LessonDao{
 
     //Помещаем урок
     @Insert
@@ -24,6 +24,6 @@ interface LessonDao {
     fun getLessonId(lessonId: Int)
 
     //Возвращаем расписание
-    @Query("SELECT * FROM lessons_table WHERE ")
-    fun getAllLessonList(): List<LessonDB>
+    @Query("SELECT * FROM lessons_table")
+    fun getAllLesson()
 }
