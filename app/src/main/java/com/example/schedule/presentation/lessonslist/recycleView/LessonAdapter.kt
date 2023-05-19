@@ -7,17 +7,17 @@ import com.example.schedule.databinding.LessonAdapterViewHolderBinding
 
 class LessonAdapter: RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
-var listOfLessonVO = listOf<LessonVO>()
+var listOfLessons = listOf<LessonVO>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
         return LessonViewHolder(LessonAdapterViewHolderBinding
             .inflate(LayoutInflater.from(parent.context), parent, false))
     }
     override fun onBindViewHolder(holder: LessonViewHolder, position: Int) {
-        holder.bind(listOfLessonVO[position])
+        holder.bind(listOfLessons[position])
     }
 
     override fun getItemCount(): Int {
-        return listOfLessonVO.size
+        return listOfLessons.size
     }
 
     //Здесь ViewHolder принимает дизайн (binding)

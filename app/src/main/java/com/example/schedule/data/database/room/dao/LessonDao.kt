@@ -21,9 +21,9 @@ interface LessonDao{
 
     //Возвращаем урок
     @Query("SELECT * FROM lessons_table WHERE id =:lessonId")
-    fun getLessonId(lessonId: Int)
+    fun getLesson(lessonId: Int)
 
     //Возвращаем расписание
     @Query("SELECT * FROM lessons_table")
-    fun getAllLesson()
+    fun getAllLessons(): List<LessonDB>
 }
