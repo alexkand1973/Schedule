@@ -7,7 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.schedule.common.app.App
+import com.example.schedule.common.utils.extentions.getApp
+import com.example.schedule.common.utils.extentions.getLessonDao
+import com.example.schedule.data.database.room.entities.LessonDB
 import com.example.schedule.databinding.FragmentAddLessonBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddLessonFragment : Fragment() {
 
@@ -29,5 +35,29 @@ class AddLessonFragment : Fragment() {
 //        tvTest.setOnClickListener {
 //
 //        }
+
+        setOnClickListeners()
+    }
+
+    //Добавление в базу данных
+    private fun setOnClickListeners() {
+        binding?.btnSaveLesson?.setOnClickListener {
+            val lessonTitle = binding?.etLessonTitle?.text.toString()
+            val lessonDescription = binding?.etLessonDescription?.text.toString()
+            val lessonTeacher = binding?.etTeachersName?.text.toString()
+
+            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.getDefault())
+            val currentDate = sdf.format(Date())
+
+
+            getLessonDao().insertLesson(
+                LessonDB(
+                    lessonTitle = lessonTitle,
+                    lessonDescription = lessonDescription,
+                    lessonTeacher = lessonTeacher,
+                    lessonLastChangedTime = currentDate
+                )
+            )
+        }
     }
 }

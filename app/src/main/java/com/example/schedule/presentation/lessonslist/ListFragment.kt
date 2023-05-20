@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schedule.R
 import com.example.schedule.common.app.App
+import com.example.schedule.data.database.room.entities.toLessonVO
 import com.example.schedule.databinding.FragmentListBinding
 import com.example.schedule.presentation.AddLessonFragment
 import com.example.schedule.presentation.lessonslist.recycleView.LessonAdapter
@@ -46,8 +47,8 @@ class ListFragment : Fragment() {
     fun initLessonAdapter() {
         lessonsAdapter = LessonAdapter()
         //here will be data from database
-//        lessonsAdapter?.listOfLessons = (requireActivity().applicationContext as App)
-//            .lessonsDao.getAllLessons()
+        lessonsAdapter?.listOfLessons = (requireActivity().applicationContext as App)
+            .lessonsDao.getAllLessons().map {lessonDB -> lessonDB.toLessonVO()}
         binding?.rvLessons?.adapter = lessonsAdapter
         binding?.rvLessons?.layoutManager = LinearLayoutManager(requireContext())
     }
