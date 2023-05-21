@@ -17,5 +17,10 @@ data class LessonDB(
 
 //Mapping, mapper - процесс создания одного типа данных из другого
 fun LessonDB.toLessonVO(): LessonVO {
-    return LessonVO(lessonTitle = lessonTitle, lessonLastChangedTime = lessonLastChangedTime)
+    return LessonVO(
+        id = id, lessonTitle = lessonTitle,
+        lessonDescription = lessonDescription,
+        lessonTeacher = lessonTeacher,
+        lessonLastChangedTime = lessonLastChangedTime
+    )
 }

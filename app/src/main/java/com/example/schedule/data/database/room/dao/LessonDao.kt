@@ -21,7 +21,7 @@ interface LessonDao{
 
     //Возвращаем урок
     @Query("SELECT * FROM lessons_table WHERE id =:lessonId")
-    fun getLesson(lessonId: Int)
+    fun getLesson(lessonId: Int): LessonDB
 
     //Возвращаем расписание
     //Можем выбрать что возвращать (по периоду?)

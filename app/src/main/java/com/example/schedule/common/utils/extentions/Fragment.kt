@@ -8,6 +8,6 @@ fun Fragment.getApp(): App {
     return (requireContext().applicationContext as App)
 }
 
-fun Fragment.getLessonDao(): LessonDao {
+fun Fragment.getLessonDao(): LessonDao? {
     return (requireContext().applicationContext as App).lessonsDao
 }

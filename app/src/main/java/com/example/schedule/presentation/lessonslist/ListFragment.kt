@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schedule.R
 import com.example.schedule.common.app.App
+import com.example.schedule.common.utils.extentions.getLessonDao
 import com.example.schedule.data.database.room.entities.toLessonVO
 import com.example.schedule.databinding.FragmentListBinding
 import com.example.schedule.presentation.AddLessonFragment
@@ -39,7 +40,7 @@ class ListFragment : Fragment() {
             requireActivity().supportFragmentManager
                 .beginTransaction().apply {
                     addToBackStack(null)
-                    .replace(R.id.fragmentContainer, AddLessonFragment()).commit()
+                        .replace(R.id.fragmentContainer, AddLessonFragment()).commit()
                 }
         }
     }
@@ -48,7 +49,10 @@ class ListFragment : Fragment() {
         lessonsAdapter = LessonAdapter()
         //here will be data from database
         lessonsAdapter?.listOfLessons = (requireActivity().applicationContext as App)
-            .lessonsDao.getAllLessons().map {lessonDB -> lessonDB.toLessonVO()}
+            .lessonsDao!!.getAllLessons()?.map { lessonDB -> lessonDB.toLessonVO() }!!
+        //для проверки работы приложения ставим заглушку
+        lessonsAdapter?.onLessonClicked = {}
+        lessonsAdapter?.lessonDao = getLessonDao()
         binding?.rvLessons?.adapter = lessonsAdapter
         binding?.rvLessons?.layoutManager = LinearLayoutManager(requireContext())
     }
