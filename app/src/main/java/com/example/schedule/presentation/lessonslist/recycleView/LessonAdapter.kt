@@ -26,7 +26,7 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
         holder.bind(lesson)
         lessonDao?.getLesson(lesson.id)?.let { lessonDB ->
-            holder.setOnClickListeners(lessonDB)
+            holder.setOnClickListeners(lessonDB) { notifyItemRemoved(position) }
         }
     }
 
@@ -48,7 +48,8 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
             binding.tvLessonLastChangeTime.text = lessonVO.lessonLastChangedTime
         }
 
-        fun setOnClickListeners(currentLesson: LessonDB) {
+        fun setOnClickListeners(currentLesson: LessonDB,
+                                onDeleteLessonClicked: () -> Unit) {
             //по нажатию на любой элемент framelayout (root) выполняем действия:
             binding.root.setOnClickListener {
                 //навигвция на фрагмент с передачей данных,
@@ -60,6 +61,7 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
             //по нажатию на delete урок удаляется
             binding.ivDeleteLesson.setOnClickListener {
                 lessonDao?.deleteLesson(currentLesson)
+                onDeleteLessonClicked()
             }
         }
     }

@@ -44,13 +44,13 @@ class AddLessonFragment : Fragment() {
         binding?.btnSaveLesson?.setOnClickListener {
             val lessonTitle = binding?.etLessonTitle?.text.toString()
             val lessonDescription = binding?.etLessonDescription?.text.toString()
-            val lessonTeacher = binding?.etTeachersName?.text.toString()
+            val lessonTeacher = binding?.etLessonTeacher?.text.toString()
 
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.getDefault())
             val currentDate = sdf.format(Date())
 
 
-            getLessonDao().insertLesson(
+            getLessonDao()?.insertLesson(
                 LessonDB(
                     lessonTitle = lessonTitle,
                     lessonDescription = lessonDescription,

@@ -45,11 +45,11 @@ class ListFragment : Fragment() {
         }
     }
 
-    fun initLessonAdapter() {
+    private fun initLessonAdapter() {
         lessonsAdapter = LessonAdapter()
         //here will be data from database
         lessonsAdapter?.listOfLessons = (requireActivity().applicationContext as App)
-            .lessonsDao!!.getAllLessons()?.map { lessonDB -> lessonDB.toLessonVO() }!!
+            .lessonsDao?.getAllLessons()?.map { lessonDB -> lessonDB.toLessonVO() }!!
         //для проверки работы приложения ставим заглушку
         lessonsAdapter?.onLessonClicked = {}
         lessonsAdapter?.lessonDao = getLessonDao()
