@@ -6,7 +6,7 @@ data class LessonVO(val id: Int = 0,
     val lessonTitle: String,
     val lessonDescription: String,
     val lessonTeacher: String,
-    val lessonLastChangedTime: String
+    var lessonLastChangedTime: String
 )
 
 //Преобразование LessonVO в LessonDB

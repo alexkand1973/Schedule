@@ -7,26 +7,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schedule.data.database.room.dao.LessonDao
 import com.example.schedule.data.database.room.entities.LessonDB
 import com.example.schedule.databinding.LessonAdapterViewHolderBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
-    var listOfLessons = listOf<LessonVO>()
+    var listOfLessons: MutableList<LessonVO> = mutableListOf()
     var lessonDao: LessonDao? = null
-    var onLessonClicked: (() -> Unit)? = null
+    var onLessonClicked: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
         return LessonViewHolder(
             LessonAdapterViewHolderBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false), lessonDao,
-             onLessonClicked)
+            onLessonClicked
+        )
     }
 
     override fun onBindViewHolder(holder: LessonViewHolder, position: Int) {
         val lesson = listOfLessons[position]
 
         holder.bind(lesson)
-        lessonDao?.getLesson(lesson.id)?.let { lessonDB ->
-            holder.setOnClickListeners(lessonDB) { notifyItemRemoved(position) }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            lessonDao?.getLesson(lesson.id)?.let { lessonDB ->
+                withContext(Dispatchers.Main) {
+                    holder.setOnClickListeners(lessonDB) { deleteLessonFromList(lesson) }
+                }
+            }
         }
     }
 
@@ -36,31 +46,43 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
         return listOfLessons.size
     }
 
+    private fun deleteLessonFromList(lessonVo: LessonVO) {
+        val indexToDelete = listOfLessons.indexOfFirst { currentLesson -> currentLesson.id == lessonVo.id }
+        if (indexToDelete != -1) {
+            listOfLessons.removeAt(indexToDelete)
+            notifyItemRemoved(indexToDelete)
+        }
+    }
+
     //Здесь ViewHolder принимает дизайн (binding)
     class LessonViewHolder(
         private val binding: LessonAdapterViewHolderBinding,
         private val lessonDao: LessonDao?,
-        private val onLessonClicked: (() -> Unit)?)
-        : RecyclerView.ViewHolder(binding.root) {
+        private val onLessonClicked: ((Int) -> Unit)?
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(lessonVO: LessonVO) {
             binding.tvLessonTitle.text = lessonVO.lessonTitle
             binding.tvLessonLastChangeTime.text = lessonVO.lessonLastChangedTime
         }
 
-        fun setOnClickListeners(currentLesson: LessonDB,
-                                onDeleteLessonClicked: () -> Unit) {
+        fun setOnClickListeners(
+            currentLesson: LessonDB,
+            onDeleteLessonClicked: () -> Unit
+        ) {
             //по нажатию на любой элемент framelayout (root) выполняем действия:
             binding.root.setOnClickListener {
                 //навигвция на фрагмент с передачей данных,
                 // ответственность за передачу отдаем фрагменту, используя лямбду: onLessonClicked
-                onLessonClicked?.let { onLessonClicked -> onLessonClicked() }
+                onLessonClicked?.let { onLessonClicked -> onLessonClicked(currentLesson.id) }
 //                val bundle = Bundle()
 //                bundle.putSerializable()
             }
             //по нажатию на delete урок удаляется
             binding.ivDeleteLesson.setOnClickListener {
-                lessonDao?.deleteLesson(currentLesson)
+                CoroutineScope(Dispatchers.IO).launch {
+                    lessonDao?.deleteLesson(currentLesson)
+                }
                 onDeleteLessonClicked()
             }
         }

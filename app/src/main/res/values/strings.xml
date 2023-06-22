@@ -5,6 +5,10 @@
     <string name="et_lesson_title_hint_fragment_add_lesson">Lesson title</string>
     <string name="et_name_of_teacher_hint_fragment_add_lesson">Name of Teacher</string>
     <string name="et_description_home_work_hint_fragment_add_lesson">Description, home work</string>
-    <string name="SELECT">SELECT</string>
+    <string name="btn_save_lesson_update_lesson_text_add_lesson_fragment">Updata</string>
+
+    <string name="fab_content_description_list_fragment">TODO</string>
+
+    <string name="empty_lesson_title_toast_text_add_lesson_fragment">"Please fill up lesson title"</string>
 
 </resources>
